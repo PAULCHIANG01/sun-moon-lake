@@ -16,28 +16,31 @@ img{max-width:100%}
 <style>
 /* Layout: the five Codex posters ARE the page, stacked in one phone-width column; every card on a poster is a direct link: Google Maps place, Google Maps transit route, or the booking site */
 :root{
-  --paper:#E9F1EE; --surface:#FFFFFF; --ink:#11302E; --muted:#587470; --line:#D2E1DD;
-  --lake:#0E6C68; --lake-soft:#DAEDE9; --tea:#AE5418; --tea-soft:#F7E7D7; --moss:#4D7636; --moss-soft:#E3EEDB;
-  --hs:#E2551B; --hs-fill:rgba(226,85,27,.10);
-  --on-accent:#FFFFFF; --shadow:0 1px 2px rgba(17,48,46,.06),0 10px 30px rgba(17,48,46,.10);
+  --paper:#F5EADA; --surface:#FFFAF2; --ink:#1E3B37; --muted:#806C55; --line:#E6D4B8;
+  --lake:#1F6B63; --lake-soft:#E3EEE4; --tea:#B4561F; --tea-soft:#F9E3C8; --moss:#5E7A3A; --moss-soft:#EAF0D8;
+  --hs:#D9622B; --hs-fill:rgba(217,98,43,.12);
+  --wash-a:rgba(249,212,159,.55); --wash-b:rgba(190,214,160,.35); --wash-c:rgba(244,190,170,.25);
+  --on-accent:#FFFFFF; --shadow:0 1px 2px rgba(90,60,30,.08),0 12px 30px rgba(120,80,40,.14);
   --f-display:"LXGW WenKai TC","Kaiti TC","BiauKai","STKaiti",serif;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0B1716; --surface:#13221F; --ink:#E3EEEB; --muted:#93AAA5; --line:#24403B;
-  --lake:#5FC3BA; --lake-soft:#16332F; --tea:#E89A5D; --tea-soft:#3A2617; --moss:#9CC487; --moss-soft:#1F3119;
-  --hs:#FF8A4C; --hs-fill:rgba(255,138,76,.14);
-  --on-accent:#0B1716; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35); color-scheme:dark}}
+  --paper:#1E1712; --surface:#2A211A; --ink:#F4E7D3; --muted:#C2AA8B; --line:#43352A;
+  --lake:#78C7B8; --lake-soft:#21332D; --tea:#EDA568; --tea-soft:#45301E; --moss:#AFCB8A; --moss-soft:#2C3320;
+  --hs:#FF9A5C; --hs-fill:rgba(255,154,92,.16);
+  --wash-a:rgba(237,165,104,.12); --wash-b:rgba(120,199,184,.07); --wash-c:rgba(255,154,92,.06);
+  --on-accent:#1E1712; --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#0B1716; --surface:#13221F; --ink:#E3EEEB; --muted:#93AAA5; --line:#24403B;
-  --lake:#5FC3BA; --lake-soft:#16332F; --tea:#E89A5D; --tea-soft:#3A2617; --moss:#9CC487; --moss-soft:#1F3119;
-  --hs:#FF8A4C; --hs-fill:rgba(255,138,76,.14);
-  --on-accent:#0B1716; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35); color-scheme:dark}
+  --paper:#1E1712; --surface:#2A211A; --ink:#F4E7D3; --muted:#C2AA8B; --line:#43352A;
+  --lake:#78C7B8; --lake-soft:#21332D; --tea:#EDA568; --tea-soft:#45301E; --moss:#AFCB8A; --moss-soft:#2C3320;
+  --hs:#FF9A5C; --hs-fill:rgba(255,154,92,.16);
+  --wash-a:rgba(237,165,104,.12); --wash-b:rgba(120,199,184,.07); --wash-c:rgba(255,154,92,.06);
+  --on-accent:#1E1712; --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4); color-scheme:dark}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background-color:var(--paper);background-image:radial-gradient(70% 45% at 0% 0%,var(--wash-a),transparent 70%),radial-gradient(60% 40% at 100% 35%,var(--wash-b),transparent 70%),radial-gradient(70% 45% at 10% 100%,var(--wash-c),transparent 70%);background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--tea);outline-offset:2px;border-radius:6px}
@@ -52,14 +55,14 @@ button{font:inherit;color:inherit}
 .tools{display:flex;gap:6px;align-items:center;flex:none}
 .seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface)}
 .seg button{border:0;background:transparent;padding:4px 11px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--lake);color:var(--on-accent)}
+.seg button[aria-pressed="true"]{background:var(--tea);color:var(--on-accent)}
 .eye{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted)}
 .eye svg{width:15px;height:15px}
 .eye[aria-pressed="true"]{border-color:var(--hs);color:var(--hs)}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
 .chips::-webkit-scrollbar{display:none}
 .chips a{flex:none;text-decoration:none;color:var(--ink);font-size:13px;font-weight:500;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
-.chips a.on{border-color:var(--lake);color:var(--lake);background:var(--lake-soft)}
+.chips a.on{border-color:var(--tea);color:var(--tea);background:var(--tea-soft)}
 
 .hint{display:flex;gap:10px;align-items:center;margin:14px 0 4px;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;color:var(--muted)}
 .hint .tap{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--hs-fill);color:var(--hs)}
@@ -68,7 +71,7 @@ button{font:inherit;color:inherit}
 /* posters */
 .posters{display:flex;flex-direction:column;gap:18px;padding-block:12px 8px}
 .poster{scroll-margin-top:108px}
-.frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);aspect-ratio:2/3;max-width:100%}
+.frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow),0 0 0 1px var(--line);background:var(--surface);aspect-ratio:2/3;max-width:100%}
 .frame img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
 .hs{position:absolute;border:0;padding:0;margin:0;background:transparent;border-radius:9px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s ease,box-shadow .15s ease}
 .hs:hover,.hs:focus-visible{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill);outline:none}
