@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
@@ -14,122 +14,87 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <style>
-/* Layout: the five Codex posters ARE the page, stacked in one phone-width column; every card on a poster is a direct link: Google Maps place, Google Maps transit route, or the booking site */
+/* Layout: a single long watercolor scroll. The page IS the posters' paper (#FDF7EC); posters fade into it at their edges.
+   The masthead reads like a printed travel booklet: Kai title, text-only section links, underline for the current one.
+   Deliberately single-theme: the posters are painted on light paper, so the page stays on that paper in every theme. */
 :root{
-  --paper:#F5EADA; --surface:#FFFAF2; --ink:#1E3B37; --muted:#806C55; --line:#E6D4B8;
-  --lake:#1F6B63; --lake-soft:#E3EEE4; --tea:#B4561F; --tea-soft:#F9E3C8; --moss:#5E7A3A; --moss-soft:#EAF0D8;
-  --hs:#D9622B; --hs-fill:rgba(217,98,43,.12);
-  --wash-a:rgba(249,212,159,.55); --wash-b:rgba(190,214,160,.35); --wash-c:rgba(244,190,170,.25);
-  --on-accent:#FFFFFF; --shadow:0 1px 2px rgba(90,60,30,.08),0 12px 30px rgba(120,80,40,.14);
+  --paper:#FDF7EC;          /* sampled from the posters' paper */
+  --ink:#173A36;            /* poster title ink, teal-black */
+  --muted:#8C765A;          /* warm sepia for small print */
+  --rule:#E7D6BA;           /* faint pencil line */
+  --tea:#B4561F;            /* black-tea amber, the one accent */
+  --lake:#1F6B63; --hs:#D9622B; --hs-fill:rgba(217,98,43,.12);
   --f-display:"LXGW WenKai TC","Kaiti TC","BiauKai","STKaiti",serif;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#1E1712; --surface:#2A211A; --ink:#F4E7D3; --muted:#C2AA8B; --line:#43352A;
-  --lake:#78C7B8; --lake-soft:#21332D; --tea:#EDA568; --tea-soft:#45301E; --moss:#AFCB8A; --moss-soft:#2C3320;
-  --hs:#FF9A5C; --hs-fill:rgba(255,154,92,.16);
-  --wash-a:rgba(237,165,104,.12); --wash-b:rgba(120,199,184,.07); --wash-c:rgba(255,154,92,.06);
-  --on-accent:#1E1712; --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#1E1712; --surface:#2A211A; --ink:#F4E7D3; --muted:#C2AA8B; --line:#43352A;
-  --lake:#78C7B8; --lake-soft:#21332D; --tea:#EDA568; --tea-soft:#45301E; --moss:#AFCB8A; --moss-soft:#2C3320;
-  --hs:#FF9A5C; --hs-fill:rgba(255,154,92,.16);
-  --wash-a:rgba(237,165,104,.12); --wash-b:rgba(120,199,184,.07); --wash-c:rgba(255,154,92,.06);
-  --on-accent:#1E1712; --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.4); color-scheme:dark}
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background-color:var(--paper);background-image:radial-gradient(70% 45% at 0% 0%,var(--wash-a),transparent 70%),radial-gradient(60% 40% at 100% 35%,var(--wash-b),transparent 70%),radial-gradient(70% 45% at 10% 100%,var(--wash-c),transparent 70%);background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-button{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--tea);outline-offset:2px;border-radius:6px}
-.wrap{max-width:640px;margin:0 auto;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
-@media (min-width:420px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--tea);outline-offset:3px;border-radius:2px}
 
-/* top bar */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;flex-direction:column;gap:8px;padding-block:10px 8px}
-.bar-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.brand{font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.tools{display:flex;gap:6px;align-items:center;flex:none}
-.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface)}
-.seg button{border:0;background:transparent;padding:4px 11px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--tea);color:var(--on-accent)}
-.eye{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted)}
-.eye svg{width:15px;height:15px}
-.eye[aria-pressed="true"]{border-color:var(--hs);color:var(--hs)}
-.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
-.chips::-webkit-scrollbar{display:none}
-.chips a{flex:none;text-decoration:none;color:var(--ink);font-size:13px;font-weight:500;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
-.chips a.on{border-color:var(--tea);color:var(--tea);background:var(--tea-soft)}
+/* masthead */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper)}
+.bar-in{max-width:640px;margin:0 auto;padding-block:12px 0;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand{font-family:var(--f-display);text-decoration:none;color:var(--ink);display:flex;align-items:baseline;gap:10px;min-width:0;overflow:hidden}
+.brand b{font-size:24px;font-weight:700;letter-spacing:.08em;white-space:nowrap;flex:none}
+.brand span{font-size:13px;color:var(--muted);letter-spacing:.12em;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+:lang(en) .brand b{letter-spacing:.02em}
+.lang{display:flex;align-items:baseline;gap:6px;font-family:var(--f-display);font-size:15px;color:var(--muted);flex:none}
+.lang button{color:var(--muted);padding:2px 1px;border-bottom:1.5px solid transparent}
+.lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--tea)}
+nav.toc{display:flex;gap:20px;overflow-x:auto;scrollbar-width:none;margin-top:6px;border-bottom:1px solid var(--rule)}
+nav.toc::-webkit-scrollbar{display:none}
+nav.toc a{flex:none;font-family:var(--f-display);font-size:15px;color:var(--muted);text-decoration:none;padding:6px 0 7px;border-bottom:2px solid transparent;margin-bottom:-1px;letter-spacing:.04em}
+nav.toc a.on{color:var(--ink);border-bottom-color:var(--tea)}
 
-.hint{display:flex;gap:10px;align-items:center;margin:14px 0 4px;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;color:var(--muted)}
-.hint .tap{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--hs-fill);color:var(--hs)}
-.hint .tap svg{width:16px;height:16px}
+/* one-line note under the masthead */
+.note{max-width:640px;margin:0 auto;padding-block:12px 4px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));font-size:12.5px;color:var(--muted);line-height:1.7}
+.note .k{white-space:nowrap;color:var(--ink);font-weight:500;margin-left:6px;background-image:linear-gradient(var(--c),var(--c));background-size:100% 2px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:1px}
+.note .k.map{--c:var(--hs)} .note .k.route{--c:var(--lake)} .note .k.book{--c:var(--tea)}
+.note button{color:var(--tea);text-decoration:underline;text-underline-offset:3px;margin-left:8px;font-size:12.5px}
 
-/* posters */
-.posters{display:flex;flex-direction:column;gap:18px;padding-block:12px 8px}
-.poster{scroll-margin-top:108px}
-.frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow),0 0 0 1px var(--line);background:var(--surface);aspect-ratio:2/3;max-width:100%}
+/* posters: full-bleed on phones, edges dissolve into the paper */
+.scroll{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:6px;padding-block:6px 0}
+.poster{scroll-margin-top:96px}
+.frame{position:relative;aspect-ratio:2/3;width:100%;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 2.2%,#000 97.8%,transparent 100%),linear-gradient(to right,transparent 0,#000 2.5%,#000 97.5%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0,#000 2.2%,#000 97.8%,transparent 100%),linear-gradient(to right,transparent 0,#000 2.5%,#000 97.5%,transparent 100%);mask-composite:intersect}
 .frame img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
-.hs{position:absolute;border:0;padding:0;margin:0;background:transparent;border-radius:9px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s ease,box-shadow .15s ease}
-.hs:hover,.hs:focus-visible{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill);outline:none}
+
+/* tap areas */
+.hs{position:absolute;display:block;border-radius:8px;-webkit-tap-highlight-color:transparent;transition:background-color .15s ease,box-shadow .15s ease}
+.hs.route{--hs:var(--lake);--hs-fill:rgba(31,107,99,.14)}
+.hs.ticket{--hs:var(--tea);--hs-fill:rgba(180,86,31,.14)}
+.hs:hover,.hs:focus-visible,.show-hs .hs{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill);outline:none}
 .hs:active{background:var(--hs-fill)}
-.show-hs .hs{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill)}
 .frame.flash .hs{animation:flash 1.8s ease-in-out 1}
 @keyframes flash{0%,100%{box-shadow:0 0 0 0 transparent inset;background:transparent}30%,70%{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill)}}
-.cap{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:8px 2px 0;font-size:12.5px;color:var(--muted)}
-.cap b{font-family:var(--f-display);font-size:16px;color:var(--ink);font-weight:700}
-footer{padding-block:20px 40px;color:var(--muted);font-size:12px}
 
+footer{max-width:640px;margin:0 auto;padding-block:18px 44px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));text-align:center;font-family:var(--f-display);color:var(--muted);font-size:13px;line-height:1.8}
+footer .end{display:block;font-size:20px;letter-spacing:.3em;color:var(--rule);margin-bottom:6px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame.flash .hs{animation:none}.hs{transition:none}}
-
-.hs{display:block;text-decoration:none}
-.hs.route{--hs:var(--lake);--hs-fill:color-mix(in srgb,var(--lake) 16%,transparent)}
-.hs.ticket{--hs:var(--tea);--hs-fill:color-mix(in srgb,var(--tea) 16%,transparent)}
-.hs .bd{display:none!important;position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--hs);color:#fff;opacity:0;transform:scale(.6);transition:opacity .15s ease,transform .15s ease;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-.hs .bd svg{width:12px;height:12px}
-.hs.ticket .bd{background:var(--tea)}
-.hs.route .bd{background:var(--lake)}
-.hs:hover .bd,.hs:focus-visible .bd,.show-hs .hs .bd,.frame.flash .hs .bd{opacity:1;transform:none}
-.hint .lg{display:inline-flex;align-items:center;gap:3px;margin-left:8px;font-weight:600;color:var(--ink);white-space:nowrap}
-.hint .lg svg{width:13px;height:13px;color:var(--hs)}
-.hint .lg:nth-of-type(2) svg{color:var(--lake)}
-.hint .lg.tk svg{color:var(--tea)}
-@media (prefers-reduced-motion:reduce){.hs .bd{transition:none}}
 </style>
 </head>
 <body>
 <header class="bar">
-  <div class="wrap">
-    <div class="bar-top">
-      <span class="brand" id="brand">日月潭 兩天一夜</span>
-      <div class="tools">
-        <button type="button" class="eye" id="eye" aria-pressed="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></svg><span id="eye-t">區塊</span></button>
-        <div class="seg" role="group" aria-label="Language">
-          <button id="lang-zh" type="button" data-l="zh" aria-pressed="true">中</button>
-          <button id="lang-en" type="button" data-l="en" aria-pressed="false">EN</button>
-        </div>
-      </div>
+  <div class="bar-in">
+    <div class="top">
+      <a class="brand" href="#overview"><b id="brand">日月潭</b><span id="sub">兩天一夜・大眾運輸</span></a>
+      <div class="lang" role="group" aria-label="Language"><button id="lang-zh" type="button" data-l="zh" aria-pressed="true">中</button><span aria-hidden="true">／</span><button id="lang-en" type="button" data-l="en" aria-pressed="false">EN</button></div>
     </div>
-    <nav class="chips" id="chips"></nav>
+    <nav class="toc" id="toc"></nav>
   </div>
 </header>
 
-<main class="wrap">
-  <div class="hint"><span class="tap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5V3.2a1.2 1.2 0 0 1 2.4 0V7l3.1.6a1.5 1.5 0 0 1 1.2 1.7l-.5 3.2a2 2 0 0 1-2 1.7H7.6a2 2 0 0 1-1.6-.8L3.6 10.2a1.1 1.1 0 0 1 1.6-1.5z"/></svg></span><span id="hint">點圖上的任何區塊，就會跳出 Google 地圖、上下車地址和訂票連結。</span></div>
-  <div class="posters" id="posters"></div>
-  <footer id="foot"></footer>
-</main>
+<p class="note" id="note"></p>
+<main class="scroll" id="posters"></main>
+<footer id="foot"></footer>
 
 <script>
-const ICON={
-  pin:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14.5s5-4.6 5-8.3A5 5 0 0 0 3 6.2c0 3.7 5 8.3 5 8.3z"/><circle cx="8" cy="6.3" r="1.8"/></svg>',
-  route:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="12.5" r="1.8"/><circle cx="12.5" cy="3.5" r="1.8"/><path d="M5.3 12.5h4.2a2.5 2.5 0 0 0 0-5h-3a2.5 2.5 0 0 1 0-5h4.2"/></svg>',
-  ticket:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M2 5V3.5h12V5a2 2 0 0 0 0 4v3.5H2V9a2 2 0 0 0 0-4z"/></svg>'
-};
-
 /* ---------- places (addresses checked 2026-11-10) ---------- */
 const P={
   thsr_tpe:{zh:'台灣高鐵 台北站',en:'THSR Taipei Station',addr:'台北市中正區北平西路3號',q:'台灣高鐵台北站'},
@@ -178,9 +143,7 @@ const L={
 };
 
 /* ---------- each poster area opens ONE link directly ----------
-   ['map',place]            Google Maps search for that place
-   ['dir',from,to,mode]     Google Maps directions (boarding -> drop-off), transit by default
-   ['url',linkKey]          booking / timetable site                                    */
+   ['map',place] Google Maps place · ['dir',from,to,mode] Google Maps route · ['url',linkKey] booking / timetable site */
 const GO={
   /* cover */
   pin_ss:['map','shuishe'],pin_xs:['map','xiangshan'],pin_xg:['map','xg_temple'],pin_ita:['map','ita_street'],pin_rw:['map','ropeway'],
@@ -208,67 +171,69 @@ const GO={
   fare_6669:['url','b6669_route'],fare_bike:['url','bike'],tip_hsr:['url','thsr_book'],tip_rw:['url','ropeway'],tip_6670:['url','b6670_time']
 };
 
-/* ---------- hotspot boxes in poster pixels (1024x1536): [key,x0,y0,x1,y1] ---------- */
+/* ---------- tap areas in poster pixels (1024x1536): [key,x0,y0,x1,y1] ---------- */
 const HOT={"zh":{"01_cover":[["pin_ss",140,360,330,460],["pin_xs",55,565,255,665],["pin_xg",400,635,640,730],["pin_ita",780,475,1005,580],["pin_rw",790,310,985,410],["tr_tpe",30,810,180,935],["tr_hsr",225,810,395,935],["tr_tc",435,810,575,935],["tr_6670",630,810,785,935],["tr_sml",835,810,995,935],["c1_boat",40,1070,485,1150],["c1_xg",40,1155,485,1237],["c1_ita",40,1242,485,1322],["c1_hanbi",40,1327,485,1410],["c2_sun",530,1070,995,1150],["c2_bike",530,1155,995,1237],["c2_rw",530,1242,995,1322],["c2_lunch",530,1327,995,1410]],"02_day1":[["d0-0",75,305,708,390],["d0-0p",708,305,992,390],["d0-1",75,401,708,486],["d0-1p",708,401,992,486],["d0-2",75,498,992,582],["d0-3",75,595,992,680],["d0-4",75,691,708,776],["d0-4p",708,691,992,776],["d0-5",75,788,708,872],["d0-5p",708,788,992,872],["d0-6",75,883,708,966],["d0-6p",708,883,992,966],["d0-7",75,975,992,1052],["d0-10",75,1066,992,1150],["d0-11",75,1160,992,1244]],"03_day2":[["d1-0",80,310,760,407],["d1-1",80,420,760,517],["d1-xs",80,530,760,627],["d1-2",80,640,760,737],["d1-3",80,748,760,847],["d1-4",80,858,760,954],["d1-5",80,965,760,1060],["d1-6",80,1068,760,1165],["d1-8",80,1172,760,1268],["d1-9",80,1278,760,1374]],"04_food":[["f_teaegg",12,300,1012,505],["f_dongdong",22,612,258,880],["f_fishroll",270,612,518,880],["f_nianji",525,612,765,880],["f_mochi",772,612,1010,880],["f_boar",22,885,345,1105],["f_kili",350,885,715,1105],["f_tea",720,884,1010,1125],["f_pork",335,1150,665,1400],["f_jelly",670,1150,1005,1400],["f_gift",80,1420,945,1512]],"05_budget":[["fare_hsr",70,358,960,418],["fare_6670",70,424,960,488],["fare_boat",70,493,960,562],["fare_rw",70,566,960,636],["fare_6669",70,640,960,706],["fare_bike",70,710,960,782],["tip_hsr",465,1170,960,1225],["tip_rw",465,1235,960,1290],["tip_6670",465,1420,960,1478]]},"en":{"01_cover":[["pin_ss",140,360,360,460],["pin_xs",55,560,310,665],["pin_xg",400,630,672,730],["pin_ita",780,475,1005,580],["pin_rw",790,315,1008,410],["tr_tpe",30,810,180,935],["tr_hsr",225,810,395,935],["tr_tc",435,810,575,935],["tr_6670",630,810,785,935],["tr_sml",835,810,995,935],["c1_boat",40,1070,485,1150],["c1_xg",40,1155,485,1237],["c1_ita",40,1242,485,1322],["c1_hanbi",40,1327,485,1410],["c2_sun",530,1070,995,1150],["c2_bike",530,1155,995,1237],["c2_rw",530,1242,995,1322],["c2_lunch",530,1327,995,1410]],"02_day1":[["d0-0",75,305,708,390],["d0-0p",708,305,992,390],["d0-1",75,401,708,486],["d0-1p",708,401,992,486],["d0-2",75,498,992,582],["d0-3",75,595,992,680],["d0-4",75,691,708,776],["d0-4p",708,691,992,776],["d0-5",75,788,708,872],["d0-5p",708,788,992,872],["d0-6",75,883,708,966],["d0-6p",708,883,992,966],["d0-7",75,975,992,1052],["d0-10",75,1066,992,1150],["d0-11",75,1160,992,1244]],"03_day2":[["d1-0",80,310,760,407],["d1-1",80,420,760,517],["d1-xs",80,530,760,627],["d1-2",80,640,760,737],["d1-3",80,748,760,847],["d1-4",80,858,760,954],["d1-5",80,965,760,1060],["d1-6",80,1068,760,1165],["d1-8",80,1172,760,1268],["d1-9",80,1278,760,1374]],"04_food":[["f_teaegg",12,300,1012,505],["f_dongdong",22,612,258,880],["f_fishroll",270,612,518,880],["f_nianji",525,612,765,880],["f_mochi",772,612,1010,880],["f_boar",22,885,345,1105],["f_kili",350,885,715,1105],["f_tea",720,884,1010,1125],["f_pork",335,1150,665,1400],["f_jelly",670,1150,1005,1400],["f_gift",80,1420,945,1512]],"05_budget":[["fare_hsr",70,358,960,418],["fare_6670",70,424,960,488],["fare_boat",70,493,960,562],["fare_rw",70,566,960,636],["fare_6669",70,640,960,706],["fare_bike",70,710,960,782],["tip_hsr",465,1170,960,1225],["tip_rw",465,1235,960,1290],["tip_6670",465,1420,960,1478]]}};
 
 const POSTERS=[
   {id:'01_cover',a:'overview',zh:'總覽',en:'Overview'},
-  {id:'02_day1',a:'day1',zh:'Day 1',en:'Day 1'},
-  {id:'03_day2',a:'day2',zh:'Day 2',en:'Day 2'},
+  {id:'02_day1',a:'day1',zh:'第一天',en:'Day 1'},
+  {id:'03_day2',a:'day2',zh:'第二天',en:'Day 2'},
   {id:'04_food',a:'food',zh:'美食',en:'Food'},
-  {id:'05_budget',a:'fares',zh:'票價提醒',en:'Fares & tips'}
+  {id:'05_budget',a:'fares',zh:'票價',en:'Fares'}
 ];
 const UI={
- zh:{brand:'日月潭 兩天一夜',eye:'區塊',hintA:'點圖上的區塊直接開啟',map:'Google 地圖',route:'路線',book:'訂票',foot:'資料查詢於 2026-11-10。班次、票價與營業時間請以官方公告為準；部分店家地址只有單一來源。',areas:'個可點區塊',go:'開啟'},
- en:{brand:'Sun Moon Lake',eye:'Areas',hintA:'Tap any part of a poster to open',map:'Google Maps',route:'route',book:'booking',foot:'Researched 2026-11-10. Check official notices for schedules, fares and opening hours; a few shop addresses come from a single source.',areas:'tappable areas',go:'Open'}
+ zh:{brand:'日月潭',sub:'兩天一夜・大眾運輸',note:'輕點圖上任何地方，直接開啟',map:'地圖',route:'路線',book:'訂票',show:'標出可點處',hide:'收起標示',
+   foot:'資料查詢於 2026 年 11 月 10 日<br>班次、票價與營業時間請以官方公告為準'},
+ en:{brand:'Sun Moon Lake',sub:'2 days · by bus & boat',note:'Tap anywhere on a poster to open',map:'maps',route:'routes',book:'booking',show:'show tap areas',hide:'hide',
+   foot:'Researched 10 Nov 2026<br>Check official notices for schedules, fares and hours'}
 };
 
-let lang='zh';
+let lang='zh', showing=false;
 try{const s=localStorage.getItem('sml-lang'); if(s==='zh'||s==='en') lang=s; else if(!(navigator.language||'').toLowerCase().startsWith('zh')) lang='en';}catch(e){}
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const nm=p=>lang==='zh'?p.zh:p.en;
 
 function target(key){
   const g=GO[key]; if(!g) return null;
-  if(g[0]==='map'){const p=P[g[1]];return {href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.q),icon:'pin',label:nm(p)+' · '+UI[lang].map};}
-  if(g[0]==='dir'){const a=P[g[1]],b=P[g[2]];return {href:'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a.q)+'&destination='+encodeURIComponent(b.q)+'&travelmode='+(g[3]||'transit'),icon:'route',label:nm(a)+' → '+nm(b)+' · '+UI[lang].map};}
-  const l=L[g[1]];return {href:l.url,icon:'ticket',label:l[lang]};
+  if(g[0]==='map'){const p=P[g[1]];return {href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.q),kind:'pin',label:nm(p)};}
+  if(g[0]==='dir'){const a=P[g[1]],b=P[g[2]];return {href:'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a.q)+'&destination='+encodeURIComponent(b.q)+'&travelmode='+(g[3]||'transit'),kind:'route',label:nm(a)+' → '+nm(b)};}
+  const l=L[g[1]];return {href:l.url,kind:'ticket',label:l[lang]};
 }
 
 function render(){
   const u=UI[lang],hots=HOT[lang];
   document.documentElement.lang=lang==='zh'?'zh-Hant':'en';
   document.getElementById('brand').textContent=u.brand;
-  document.getElementById('eye-t').textContent=u.eye;
-  document.getElementById('hint').innerHTML=`${esc(u.hintA)}：<span class="lg">${ICON.pin}${esc(u.map)}</span><span class="lg">${ICON.route}${esc(u.route)}</span><span class="lg tk">${ICON.ticket}${esc(u.book)}</span>`;
-  document.getElementById('foot').textContent=u.foot;
-  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===lang)));
-  document.getElementById('chips').innerHTML=POSTERS.map(p=>`<a href="#${p.a}">${esc(p[lang])}</a>`).join('');
+  document.getElementById('sub').textContent=u.sub;
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===lang)));
+  document.getElementById('toc').innerHTML=POSTERS.map(p=>`<a href="#${p.a}">${esc(p[lang])}</a>`).join('');
+  document.getElementById('note').innerHTML=`${esc(u.note)}<span class="k map">${esc(u.map)}</span><span class="k route">${esc(u.route)}</span><span class="k book">${esc(u.book)}</span><button type="button" id="eye" aria-pressed="${showing}">${esc(showing?u.hide:u.show)}</button>`;
+  document.getElementById('foot').innerHTML=`<span class="end" aria-hidden="true">～</span>${u.foot}`;
   document.getElementById('posters').innerHTML=POSTERS.map((p,pi)=>{
     const boxes=(hots[p.id]||[]).map(([key,x0,y0,x1,y1])=>{const t=target(key); if(!t) return '';
-      return `<a class="hs ${t.icon}" href="${esc(t.href)}" target="_blank" rel="noopener" aria-label="${esc(t.label)}" title="${esc(t.label)}" style="left:${(x0/10.24).toFixed(2)}%;top:${(y0/15.36).toFixed(2)}%;width:${((x1-x0)/10.24).toFixed(2)}%;height:${((y1-y0)/15.36).toFixed(2)}%"><span class="bd">${ICON[t.icon]}</span></a>`;}).join('');
-    const n=(hots[p.id]||[]).length;
-    return `<section class="poster" id="${p.a}"><div class="frame"><img src="img/${p.id}_${lang}.jpg" alt="${esc(p[lang])}" ${pi?'loading="lazy"':''} width="1024" height="1536">${boxes}</div><div class="cap"><b>${esc(p[lang])}</b><span>${n} ${u.areas}</span></div></section>`;}).join('');
+      return `<a class="hs ${t.kind}" href="${esc(t.href)}" target="_blank" rel="noopener" aria-label="${esc(t.label)}" title="${esc(t.label)}" style="left:${(x0/10.24).toFixed(2)}%;top:${(y0/15.36).toFixed(2)}%;width:${((x1-x0)/10.24).toFixed(2)}%;height:${((y1-y0)/15.36).toFixed(2)}%"></a>`;}).join('');
+    return `<section class="poster" id="${p.a}" aria-label="${esc(p[lang])}"><div class="frame"><img src="img/${p.id}_${lang}.jpg" alt="${esc(p[lang])}" ${pi?'loading="lazy"':''} width="1024" height="1536">${boxes}</div></section>`;}).join('');
   observe();
 }
 
 let io;
 function observe(){
   if(io) io.disconnect();
-  const seen=new Set(),chips=[...document.querySelectorAll('#chips a')];
+  const seen=new Set(),links=[...document.querySelectorAll('#toc a')];
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   io=new IntersectionObserver(es=>es.forEach(en=>{
     if(!en.isIntersecting) return;
     const id=en.target.id;
-    chips.forEach(c=>c.classList.toggle('on',c.getAttribute('href')==='#'+id));
+    links.forEach(c=>c.classList.toggle('on',c.getAttribute('href')==='#'+id));
+    const on=links.find(c=>c.classList.contains('on')); if(on) on.scrollIntoView({block:'nearest',inline:'nearest'});
     if(!reduce && !seen.has(id)){seen.add(id);const f=en.target.querySelector('.frame');f.classList.add('flash');setTimeout(()=>f.classList.remove('flash'),1900);}
-  }),{rootMargin:'-110px 0px -45% 0px'});
+  }),{rootMargin:'-100px 0px -45% 0px'});
   document.querySelectorAll('.poster').forEach(s=>io.observe(s));
 }
 
 document.addEventListener('click',e=>{
-  const l=e.target.closest('.seg button'); if(l){lang=l.dataset.l;try{localStorage.setItem('sml-lang',lang)}catch(err){}render();return;}
-  if(e.target.closest('#eye')){const b=document.getElementById('eye'),on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));document.body.classList.toggle('show-hs',on);}
+  const l=e.target.closest('.lang button'); if(l){lang=l.dataset.l;try{localStorage.setItem('sml-lang',lang)}catch(err){}render();return;}
+  if(e.target.closest('#eye')){showing=!showing;document.body.classList.toggle('show-hs',showing);const b=document.getElementById('eye');b.setAttribute('aria-pressed',String(showing));b.textContent=showing?UI[lang].hide:UI[lang].show;}
 });
 render();
 </script>
