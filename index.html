@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>日月潭兩天一夜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: the five Codex posters ARE the page, stacked in one phone-width column; every card on a poster is a direct link: Google Maps place, Google Maps transit route, or the booking site */
+:root{
+  --paper:#E9F1EE; --surface:#FFFFFF; --ink:#11302E; --muted:#587470; --line:#D2E1DD;
+  --lake:#0E6C68; --lake-soft:#DAEDE9; --tea:#AE5418; --tea-soft:#F7E7D7; --moss:#4D7636; --moss-soft:#E3EEDB;
+  --hs:#E2551B; --hs-fill:rgba(226,85,27,.10);
+  --on-accent:#FFFFFF; --shadow:0 1px 2px rgba(17,48,46,.06),0 10px 30px rgba(17,48,46,.10);
+  --f-display:"LXGW WenKai TC","Kaiti TC","BiauKai","STKaiti",serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0B1716; --surface:#13221F; --ink:#E3EEEB; --muted:#93AAA5; --line:#24403B;
+  --lake:#5FC3BA; --lake-soft:#16332F; --tea:#E89A5D; --tea-soft:#3A2617; --moss:#9CC487; --moss-soft:#1F3119;
+  --hs:#FF8A4C; --hs-fill:rgba(255,138,76,.14);
+  --on-accent:#0B1716; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0B1716; --surface:#13221F; --ink:#E3EEEB; --muted:#93AAA5; --line:#24403B;
+  --lake:#5FC3BA; --lake-soft:#16332F; --tea:#E89A5D; --tea-soft:#3A2617; --moss:#9CC487; --moss-soft:#1F3119;
+  --hs:#FF8A4C; --hs-fill:rgba(255,138,76,.14);
+  --on-accent:#0B1716; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--tea);outline-offset:2px;border-radius:6px}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+@media (min-width:420px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-direction:column;gap:8px;padding-block:10px 8px}
+.bar-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand{font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tools{display:flex;gap:6px;align-items:center;flex:none}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--surface)}
+.seg button{border:0;background:transparent;padding:4px 11px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--lake);color:var(--on-accent)}
+.eye{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--muted)}
+.eye svg{width:15px;height:15px}
+.eye[aria-pressed="true"]{border-color:var(--hs);color:var(--hs)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;text-decoration:none;color:var(--ink);font-size:13px;font-weight:500;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chips a.on{border-color:var(--lake);color:var(--lake);background:var(--lake-soft)}
+
+.hint{display:flex;gap:10px;align-items:center;margin:14px 0 4px;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.hint .tap{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--hs-fill);color:var(--hs)}
+.hint .tap svg{width:16px;height:16px}
+
+/* posters */
+.posters{display:flex;flex-direction:column;gap:18px;padding-block:12px 8px}
+.poster{scroll-margin-top:108px}
+.frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);aspect-ratio:2/3;max-width:100%}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.hs{position:absolute;border:0;padding:0;margin:0;background:transparent;border-radius:9px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .15s ease,box-shadow .15s ease}
+.hs:hover,.hs:focus-visible{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill);outline:none}
+.hs:active{background:var(--hs-fill)}
+.show-hs .hs{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill)}
+.frame.flash .hs{animation:flash 1.8s ease-in-out 1}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 transparent inset;background:transparent}30%,70%{box-shadow:0 0 0 2px var(--hs) inset;background:var(--hs-fill)}}
+.cap{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:8px 2px 0;font-size:12.5px;color:var(--muted)}
+.cap b{font-family:var(--f-display);font-size:16px;color:var(--ink);font-weight:700}
+footer{padding-block:20px 40px;color:var(--muted);font-size:12px}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.frame.flash .hs{animation:none}.hs{transition:none}}
+
+.hs{display:block;text-decoration:none}
+.hs.route{--hs:var(--lake);--hs-fill:color-mix(in srgb,var(--lake) 16%,transparent)}
+.hs.ticket{--hs:var(--tea);--hs-fill:color-mix(in srgb,var(--tea) 16%,transparent)}
+.hs .bd{display:none!important;position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--hs);color:#fff;opacity:0;transform:scale(.6);transition:opacity .15s ease,transform .15s ease;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.hs .bd svg{width:12px;height:12px}
+.hs.ticket .bd{background:var(--tea)}
+.hs.route .bd{background:var(--lake)}
+.hs:hover .bd,.hs:focus-visible .bd,.show-hs .hs .bd,.frame.flash .hs .bd{opacity:1;transform:none}
+.hint .lg{display:inline-flex;align-items:center;gap:3px;margin-left:8px;font-weight:600;color:var(--ink);white-space:nowrap}
+.hint .lg svg{width:13px;height:13px;color:var(--hs)}
+.hint .lg:nth-of-type(2) svg{color:var(--lake)}
+.hint .lg.tk svg{color:var(--tea)}
+@media (prefers-reduced-motion:reduce){.hs .bd{transition:none}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <div class="bar-top">
+      <span class="brand" id="brand">日月潭 兩天一夜</span>
+      <div class="tools">
+        <button type="button" class="eye" id="eye" aria-pressed="false"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></svg><span id="eye-t">區塊</span></button>
+        <div class="seg" role="group" aria-label="Language">
+          <button id="lang-zh" type="button" data-l="zh" aria-pressed="true">中</button>
+          <button id="lang-en" type="button" data-l="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+    <nav class="chips" id="chips"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hint"><span class="tap"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5V3.2a1.2 1.2 0 0 1 2.4 0V7l3.1.6a1.5 1.5 0 0 1 1.2 1.7l-.5 3.2a2 2 0 0 1-2 1.7H7.6a2 2 0 0 1-1.6-.8L3.6 10.2a1.1 1.1 0 0 1 1.6-1.5z"/></svg></span><span id="hint">點圖上的任何區塊，就會跳出 Google 地圖、上下車地址和訂票連結。</span></div>
+  <div class="posters" id="posters"></div>
+  <footer id="foot"></footer>
+</main>
+
+<script>
+const ICON={
+  pin:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14.5s5-4.6 5-8.3A5 5 0 0 0 3 6.2c0 3.7 5 8.3 5 8.3z"/><circle cx="8" cy="6.3" r="1.8"/></svg>',
+  route:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="12.5" r="1.8"/><circle cx="12.5" cy="3.5" r="1.8"/><path d="M5.3 12.5h4.2a2.5 2.5 0 0 0 0-5h-3a2.5 2.5 0 0 1 0-5h4.2"/></svg>',
+  ticket:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M2 5V3.5h12V5a2 2 0 0 0 0 4v3.5H2V9a2 2 0 0 0 0-4z"/></svg>'
+};
+
+/* ---------- places (addresses checked 2026-11-10) ---------- */
+const P={
+  thsr_tpe:{zh:'台灣高鐵 台北站',en:'THSR Taipei Station',addr:'台北市中正區北平西路3號',q:'台灣高鐵台北站'},
+  thsr_tc:{zh:'台灣高鐵 台中站',en:'THSR Taichung Station',addr:'台中市烏日區站區二路8號',q:'台灣高鐵台中站'},
+  bus_tc:{zh:'高鐵台中站 6670 乘車處',en:'Bus 6670 stop, THSR Taichung',addr:'台中市烏日區站區二路8號（1F 第5出口・第3月台・南投客運櫃台）',addrEn:'1F Exit 5, Platform 3 (Nantou Bus counter)',q:'高鐵台中站 南投客運'},
+  bus_sml:{zh:'南投客運 日月潭站（水社）',en:'Nantou Bus – Sun Moon Lake Stn (Shuishe)',addr:'南投縣魚池鄉中山路163號（水社，派出所對面）',q:'南投客運 日月潭站',warn:1},
+  shuishe:{zh:'水社（住宿區）',en:'Shuishe village (stay here)',addr:'南投縣魚池鄉水社村',q:'日月潭 水社'},
+  pier_ss:{zh:'水社碼頭',en:'Shuishe Pier',addr:'南投縣魚池鄉水社碼頭（售票：中山路163號聯合服務站）',q:'日月潭水社碼頭'},
+  pier_xg:{zh:'玄光碼頭',en:'Xuanguang Pier',addr:'南投縣魚池鄉玄光碼頭',q:'日月潭玄光碼頭'},
+  pier_ita:{zh:'伊達邵碼頭',en:'Ita Thao Pier',addr:'南投縣魚池鄉伊達邵碼頭（售票：文化街127號遊客中心）',q:'日月潭伊達邵碼頭'},
+  ropeway:{zh:'日月潭纜車（日月潭站）',en:'Sun Moon Lake Ropeway',addr:'南投縣魚池鄉日月村中正路102號',q:'日月潭纜車',hours:{zh:'平日 10:30–16:00・假日 10:00–16:30・每月第一個週三保養',en:'Wkdy 10:30–16:00 · Wknd 10:00–16:30 · closed 1st Wed monthly'}},
+  xiangshan:{zh:'向山遊客中心',en:'Xiangshan Visitor Center',addr:'南投縣魚池鄉水社村中山路599號',q:'向山遊客中心',hours:{zh:'約 09:00–17:00',en:'≈ 09:00–17:00'}},
+  giant:{zh:'捷安特 日月潭站（租單車）',en:'Giant bike rental, Sun Moon Lake',addr:'南投縣魚池鄉水社村中山路163號1樓',q:'捷安特 日月潭站',hours:{zh:'07:00–18:00・週四公休',en:'07:00–18:00 · closed Thu'}},
+  hanbi:{zh:'涵碧步道',en:'Hanbi Trail',addr:'從水社碼頭或梅荷園步行進入',addrEn:'Walk in from Shuishe Pier or Meihe Garden',q:'涵碧步道'},
+  zhaowu:{zh:'朝霧碼頭',en:'Zhaowu Pier (sunrise mist)',addr:'南投縣魚池鄉朝霧碼頭',q:'日月潭 朝霧碼頭'},
+  xg_temple:{zh:'玄光寺',en:'Xuanguang Temple',addr:'南投縣魚池鄉玄光碼頭旁',q:'玄光寺 日月潭'},
+  qinglong:{zh:'青龍山步道',en:'Qinglong Mountain Trail',addr:'玄光碼頭起步・850 m・約 30 分',addrEn:'Starts at Xuanguang Pier · 850 m · ~30 min',q:'青龍山步道 日月潭'},
+  xuanzang:{zh:'玄奘寺',en:'Xuanzang Temple',addr:'南投縣魚池鄉日月村中正路389號',q:'玄奘寺 日月潭'},
+  ita_street:{zh:'伊達邵老街',en:'Ita Thao Old Street',addr:'南投縣魚池鄉日月村義勇街・文化街一帶',q:'伊達邵老街'},
+  ita_walk:{zh:'伊達邵親水步道',en:'Ita Thao Waterfront Trail',addr:'伊達邵商圈旁 → 纜車站，約 0.9 km',addrEn:'Ita Thao → Ropeway station, ~0.9 km',q:'伊達邵親水步道'},
+  teaegg:{zh:'金盆阿嬤香菇茶葉蛋',en:"Grandma Jinpen's Mushroom Tea Eggs",addr:'南投縣魚池鄉中正路338號（玄光碼頭）',q:'金盆阿嬤香菇茶葉蛋',warn:1,dish:{zh:'香菇茶葉蛋',en:'Mushroom tea egg'},price:'NT$15',hours:{zh:'09:30–17:00',en:'09:30–17:00'}},
+  dongdong:{zh:'東東刈包',en:'Dong Dong Gua Bao',addr:'南投縣魚池鄉義勇街111號',q:'東東刈包 日月潭',dish:{zh:'豆干刈包',en:'Tofu gua bao'},price:'NT$50',hours:{zh:'10:30–18:00 售完為止・⚠公休待確認',en:'10:30–18:00 till sold out · ⚠ closing day unclear'}},
+  fishroll:{zh:'總統魚酥捲',en:'President-fish Crispy Rolls',addr:'伊達邵老街（店址未查到）',addrEn:'Ita Thao Old Street (exact address not found)',q:'總統魚酥捲 伊達邵',warn:1,dish:{zh:'總統魚酥捲',en:'Crispy fish rolls'},price:'2 支 NT$120',priceEn:'2 for NT$120',hours:{zh:'12:00–18:00・不定休',en:'12:00–18:00 · irregular'}},
+  nianji:{zh:'年記香菇高麗菜包',en:'Nian Ji Mushroom-Cabbage Buns',addr:'伊達邵 文化街／義勇街 95 號（兩來源不同）',addrEn:'Ita Thao, No. 95 (Wenhua or Yiyong St., sources differ)',q:'年記香菇高麗菜包',warn:1,dish:{zh:'香菇高麗菜包',en:'Mushroom-cabbage bun'},price:'NT$60',hours:{zh:'10:00–18:00・週三四休',en:'10:00–18:00 · closed Wed & Thu'}},
+  abu:{zh:'阿布莎夢安',en:'A-Bu-Sha-Meng-An',addr:'南投縣魚池鄉環湖公路298-306號（伊達邵美食街）',q:'阿布莎夢安 伊達邵',warn:1,dish:{zh:'烤山豬肉串・馬告香腸・烤小米麻糬',en:'Wild boar skewers · maqaw sausage · grilled millet mochi'},hours:{zh:'⚠ 10:00–20:00',en:'⚠ 10:00–20:00'}},
+  riyue_tea:{zh:'日月茶行',en:'Riyue Tea Shop',addr:'伊達邵（店址未查到）',addrEn:'Ita Thao (exact address not found)',q:'日月茶行 伊達邵',warn:1,dish:{zh:'烏龍奶茶',en:'Oolong milk tea'},price:'NT$60',hours:{zh:'11:00–18:30・週四休',en:'11:00–18:30 · closed Thu'}},
+  zhila:{zh:'支蠟小館',en:'Zhila Restaurant',addr:'南投縣魚池鄉義勇街87號（7-11 隔壁）',q:'支蠟小館 日月潭',dish:{zh:'奇力魚・總統魚・竹筒飯',en:'Kili fish · president fish · bamboo rice'},hours:{zh:'⚠ 08:00–19:00',en:'⚠ 08:00–19:00'}},
+  lusian:{zh:'麓司岸餐坊',en:"Lusi'an (Thao cuisine)",addr:'南投縣魚池鄉文化街108號',q:'麓司岸餐坊',dish:{zh:'邵族合菜（小份 2–3 人）',en:'Thao set dishes (small, 2–3 ppl)'},price:'NT$1,000',hours:{zh:'11:30–14:00・17:30–20:00',en:'11:30–14:00 · 17:30–20:00'}},
+  macafe:{zh:'碼啡館',en:'Ma Coffee',addr:'南投縣魚池鄉名勝街11號（水社碼頭）',q:'碼啡館 日月潭',warn:1,dish:{zh:'邵族單人套餐・阿薩姆紅茶凍',en:'Thao set meal · Assam tea jelly'},hours:{zh:'⚠ 11:00–20:00',en:'⚠ 11:00–20:00'}},
+  afengshi:{zh:'阿豐師餐廳',en:'A-Feng-Shi Restaurant',addr:'南投縣魚池鄉中山路406巷2號',q:'阿豐師餐廳 日月潭',warn:1,dish:{zh:'紅茶東坡肉',en:'Black-tea braised pork belly'},hours:{zh:'11:00–14:30・17:00–19:30・週二休',en:'11:00–14:30 · 17:00–19:30 · closed Tue'}}
+};
+
+/* ---------- booking / info links ---------- */
+const L={
+  thsr_book:{zh:'高鐵網路訂票',en:'Book HSR online',url:'https://irs.thsrc.com.tw/IMINT/',book:1},
+  thsr_time:{zh:'高鐵時刻查詢',en:'HSR timetable',url:'https://www.thsrc.com.tw/'},
+  b6670_book:{zh:'6670 網路訂位（南投假期）',en:'Reserve 6670 (Nantou Holiday)',url:'https://ntbus.welcometw.com/tour/listAll?category=E70',book:1},
+  b6670_time:{zh:'6670 時刻表',en:'6670 timetable',url:'https://www.taiwantrip.com.tw/Frontend/Bustime/TimeTable/R0005'},
+  b6670_route:{zh:'6670 路線與票價',en:'6670 route & fares',url:'https://www.taiwantrip.com.tw/Frontend/Route/Select_p?RouteID=R0005'},
+  boat_book:{zh:'遊湖船網路購票',en:'Buy boat ticket online',url:'https://ntbus.welcometw.com',book:1},
+  boat_info:{zh:'碼頭資訊（官方）',en:'Pier info (official)',url:'https://www.sunmoonlake.gov.tw/attractions/Attractions?A=20&Id=148'},
+  b6669:{zh:'6669 環湖線（官方）',en:'Bus 6669 (official)',url:'https://www.sunmoonlake.gov.tw/Explore/TaiwanTrips?a=476&id=484'},
+  b6669_route:{zh:'6669 路線時刻',en:'Bus 6669 route & times',url:'https://www.taiwantrip.com.tw/Frontend/Route/Select_p?RouteID=R0124'},
+  ropeway:{zh:'纜車官網（現場購票）',en:'Ropeway site (buy on site)',url:'https://www.ropeway.com.tw/'},
+  bike:{zh:'捷安特日月潭站資訊',en:'Giant rental info',url:'https://www.sunmoonlake.gov.tw/Shop/Stores?a=45&id=21'}
+};
+
+/* ---------- each poster area opens ONE link directly ----------
+   ['map',place]            Google Maps search for that place
+   ['dir',from,to,mode]     Google Maps directions (boarding -> drop-off), transit by default
+   ['url',linkKey]          booking / timetable site                                    */
+const GO={
+  /* cover */
+  pin_ss:['map','shuishe'],pin_xs:['map','xiangshan'],pin_xg:['map','xg_temple'],pin_ita:['map','ita_street'],pin_rw:['map','ropeway'],
+  tr_tpe:['map','thsr_tpe'],tr_hsr:['url','thsr_book'],tr_tc:['map','bus_tc'],tr_6670:['url','b6670_book'],tr_sml:['map','bus_sml'],
+  c1_boat:['url','boat_book'],c1_xg:['map','xg_temple'],c1_ita:['map','ita_street'],c1_hanbi:['map','hanbi'],
+  c2_sun:['map','pier_ss'],c2_bike:['map','giant'],c2_rw:['map','ropeway'],c2_lunch:['map','lusian'],
+  /* day 1: title area -> map / route, right pill -> booking */
+  'd0-0':['dir','thsr_tpe','thsr_tc'],'d0-0p':['url','thsr_book'],
+  'd0-1':['dir','bus_tc','bus_sml'],'d0-1p':['url','b6670_book'],
+  'd0-2':['map','shuishe'],'d0-3':['map','macafe'],
+  'd0-4':['dir','pier_ss','pier_xg'],'d0-4p':['url','boat_book'],
+  'd0-5':['map','teaegg'],'d0-5p':['map','qinglong'],
+  'd0-6':['dir','pier_xg','pier_ita'],'d0-6p':['url','boat_book'],
+  'd0-7':['map','ita_street'],'d0-10':['map','hanbi'],'d0-11':['map','afengshi'],
+  /* day 2 */
+  'd1-0':['map','pier_ss'],'d1-1':['map','giant'],'d1-xs':['map','xiangshan'],'d1-2':['map','shuishe'],
+  'd1-3':['dir','bus_sml','ropeway'],'d1-4':['map','ropeway'],'d1-5':['map','lusian'],'d1-6':['map','ita_street'],
+  'd1-8':['map','bus_sml'],'d1-9':['url','thsr_book'],
+  /* food */
+  f_teaegg:['map','teaegg'],f_dongdong:['map','dongdong'],f_fishroll:['map','fishroll'],f_nianji:['map','nianji'],
+  f_mochi:['map','abu'],f_boar:['map','abu'],f_kili:['map','zhila'],f_tea:['map','riyue_tea'],
+  f_pork:['map','afengshi'],f_jelly:['map','macafe'],f_gift:['map','ita_street'],
+  /* fares & tips -> booking / timetable sites */
+  fare_hsr:['url','thsr_book'],fare_6670:['url','b6670_book'],fare_boat:['url','boat_book'],fare_rw:['url','ropeway'],
+  fare_6669:['url','b6669_route'],fare_bike:['url','bike'],tip_hsr:['url','thsr_book'],tip_rw:['url','ropeway'],tip_6670:['url','b6670_time']
+};
+
+/* ---------- hotspot boxes in poster pixels (1024x1536): [key,x0,y0,x1,y1] ---------- */
+const HOT={"zh":{"01_cover":[["pin_ss",140,360,330,460],["pin_xs",55,565,255,665],["pin_xg",400,635,640,730],["pin_ita",780,475,1005,580],["pin_rw",790,310,985,410],["tr_tpe",30,810,180,935],["tr_hsr",225,810,395,935],["tr_tc",435,810,575,935],["tr_6670",630,810,785,935],["tr_sml",835,810,995,935],["c1_boat",40,1070,485,1150],["c1_xg",40,1155,485,1237],["c1_ita",40,1242,485,1322],["c1_hanbi",40,1327,485,1410],["c2_sun",530,1070,995,1150],["c2_bike",530,1155,995,1237],["c2_rw",530,1242,995,1322],["c2_lunch",530,1327,995,1410]],"02_day1":[["d0-0",75,305,708,390],["d0-0p",708,305,992,390],["d0-1",75,401,708,486],["d0-1p",708,401,992,486],["d0-2",75,498,992,582],["d0-3",75,595,992,680],["d0-4",75,691,708,776],["d0-4p",708,691,992,776],["d0-5",75,788,708,872],["d0-5p",708,788,992,872],["d0-6",75,883,708,966],["d0-6p",708,883,992,966],["d0-7",75,975,992,1052],["d0-10",75,1066,992,1150],["d0-11",75,1160,992,1244]],"03_day2":[["d1-0",80,310,760,407],["d1-1",80,420,760,517],["d1-xs",80,530,760,627],["d1-2",80,640,760,737],["d1-3",80,748,760,847],["d1-4",80,858,760,954],["d1-5",80,965,760,1060],["d1-6",80,1068,760,1165],["d1-8",80,1172,760,1268],["d1-9",80,1278,760,1374]],"04_food":[["f_teaegg",12,300,1012,505],["f_dongdong",22,612,258,880],["f_fishroll",270,612,518,880],["f_nianji",525,612,765,880],["f_mochi",772,612,1010,880],["f_boar",22,885,345,1105],["f_kili",350,885,715,1105],["f_tea",720,884,1010,1125],["f_pork",335,1150,665,1400],["f_jelly",670,1150,1005,1400],["f_gift",80,1420,945,1512]],"05_budget":[["fare_hsr",70,358,960,418],["fare_6670",70,424,960,488],["fare_boat",70,493,960,562],["fare_rw",70,566,960,636],["fare_6669",70,640,960,706],["fare_bike",70,710,960,782],["tip_hsr",465,1170,960,1225],["tip_rw",465,1235,960,1290],["tip_6670",465,1420,960,1478]]},"en":{"01_cover":[["pin_ss",140,360,360,460],["pin_xs",55,560,310,665],["pin_xg",400,630,672,730],["pin_ita",780,475,1005,580],["pin_rw",790,315,1008,410],["tr_tpe",30,810,180,935],["tr_hsr",225,810,395,935],["tr_tc",435,810,575,935],["tr_6670",630,810,785,935],["tr_sml",835,810,995,935],["c1_boat",40,1070,485,1150],["c1_xg",40,1155,485,1237],["c1_ita",40,1242,485,1322],["c1_hanbi",40,1327,485,1410],["c2_sun",530,1070,995,1150],["c2_bike",530,1155,995,1237],["c2_rw",530,1242,995,1322],["c2_lunch",530,1327,995,1410]],"02_day1":[["d0-0",75,305,708,390],["d0-0p",708,305,992,390],["d0-1",75,401,708,486],["d0-1p",708,401,992,486],["d0-2",75,498,992,582],["d0-3",75,595,992,680],["d0-4",75,691,708,776],["d0-4p",708,691,992,776],["d0-5",75,788,708,872],["d0-5p",708,788,992,872],["d0-6",75,883,708,966],["d0-6p",708,883,992,966],["d0-7",75,975,992,1052],["d0-10",75,1066,992,1150],["d0-11",75,1160,992,1244]],"03_day2":[["d1-0",80,310,760,407],["d1-1",80,420,760,517],["d1-xs",80,530,760,627],["d1-2",80,640,760,737],["d1-3",80,748,760,847],["d1-4",80,858,760,954],["d1-5",80,965,760,1060],["d1-6",80,1068,760,1165],["d1-8",80,1172,760,1268],["d1-9",80,1278,760,1374]],"04_food":[["f_teaegg",12,300,1012,505],["f_dongdong",22,612,258,880],["f_fishroll",270,612,518,880],["f_nianji",525,612,765,880],["f_mochi",772,612,1010,880],["f_boar",22,885,345,1105],["f_kili",350,885,715,1105],["f_tea",720,884,1010,1125],["f_pork",335,1150,665,1400],["f_jelly",670,1150,1005,1400],["f_gift",80,1420,945,1512]],"05_budget":[["fare_hsr",70,358,960,418],["fare_6670",70,424,960,488],["fare_boat",70,493,960,562],["fare_rw",70,566,960,636],["fare_6669",70,640,960,706],["fare_bike",70,710,960,782],["tip_hsr",465,1170,960,1225],["tip_rw",465,1235,960,1290],["tip_6670",465,1420,960,1478]]}};
+
+const POSTERS=[
+  {id:'01_cover',a:'overview',zh:'總覽',en:'Overview'},
+  {id:'02_day1',a:'day1',zh:'Day 1',en:'Day 1'},
+  {id:'03_day2',a:'day2',zh:'Day 2',en:'Day 2'},
+  {id:'04_food',a:'food',zh:'美食',en:'Food'},
+  {id:'05_budget',a:'fares',zh:'票價提醒',en:'Fares & tips'}
+];
+const UI={
+ zh:{brand:'日月潭 兩天一夜',eye:'區塊',hintA:'點圖上的區塊直接開啟',map:'Google 地圖',route:'路線',book:'訂票',foot:'資料查詢於 2026-11-10。班次、票價與營業時間請以官方公告為準；部分店家地址只有單一來源。',areas:'個可點區塊',go:'開啟'},
+ en:{brand:'Sun Moon Lake',eye:'Areas',hintA:'Tap any part of a poster to open',map:'Google Maps',route:'route',book:'booking',foot:'Researched 2026-11-10. Check official notices for schedules, fares and opening hours; a few shop addresses come from a single source.',areas:'tappable areas',go:'Open'}
+};
+
+let lang='zh';
+try{const s=localStorage.getItem('sml-lang'); if(s==='zh'||s==='en') lang=s; else if(!(navigator.language||'').toLowerCase().startsWith('zh')) lang='en';}catch(e){}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nm=p=>lang==='zh'?p.zh:p.en;
+
+function target(key){
+  const g=GO[key]; if(!g) return null;
+  if(g[0]==='map'){const p=P[g[1]];return {href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.q),icon:'pin',label:nm(p)+' · '+UI[lang].map};}
+  if(g[0]==='dir'){const a=P[g[1]],b=P[g[2]];return {href:'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a.q)+'&destination='+encodeURIComponent(b.q)+'&travelmode='+(g[3]||'transit'),icon:'route',label:nm(a)+' → '+nm(b)+' · '+UI[lang].map};}
+  const l=L[g[1]];return {href:l.url,icon:'ticket',label:l[lang]};
+}
+
+function render(){
+  const u=UI[lang],hots=HOT[lang];
+  document.documentElement.lang=lang==='zh'?'zh-Hant':'en';
+  document.getElementById('brand').textContent=u.brand;
+  document.getElementById('eye-t').textContent=u.eye;
+  document.getElementById('hint').innerHTML=`${esc(u.hintA)}：<span class="lg">${ICON.pin}${esc(u.map)}</span><span class="lg">${ICON.route}${esc(u.route)}</span><span class="lg tk">${ICON.ticket}${esc(u.book)}</span>`;
+  document.getElementById('foot').textContent=u.foot;
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===lang)));
+  document.getElementById('chips').innerHTML=POSTERS.map(p=>`<a href="#${p.a}">${esc(p[lang])}</a>`).join('');
+  document.getElementById('posters').innerHTML=POSTERS.map((p,pi)=>{
+    const boxes=(hots[p.id]||[]).map(([key,x0,y0,x1,y1])=>{const t=target(key); if(!t) return '';
+      return `<a class="hs ${t.icon}" href="${esc(t.href)}" target="_blank" rel="noopener" aria-label="${esc(t.label)}" title="${esc(t.label)}" style="left:${(x0/10.24).toFixed(2)}%;top:${(y0/15.36).toFixed(2)}%;width:${((x1-x0)/10.24).toFixed(2)}%;height:${((y1-y0)/15.36).toFixed(2)}%"><span class="bd">${ICON[t.icon]}</span></a>`;}).join('');
+    const n=(hots[p.id]||[]).length;
+    return `<section class="poster" id="${p.a}"><div class="frame"><img src="img/${p.id}_${lang}.jpg" alt="${esc(p[lang])}" ${pi?'loading="lazy"':''} width="1024" height="1536">${boxes}</div><div class="cap"><b>${esc(p[lang])}</b><span>${n} ${u.areas}</span></div></section>`;}).join('');
+  observe();
+}
+
+let io;
+function observe(){
+  if(io) io.disconnect();
+  const seen=new Set(),chips=[...document.querySelectorAll('#chips a')];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  io=new IntersectionObserver(es=>es.forEach(en=>{
+    if(!en.isIntersecting) return;
+    const id=en.target.id;
+    chips.forEach(c=>c.classList.toggle('on',c.getAttribute('href')==='#'+id));
+    if(!reduce && !seen.has(id)){seen.add(id);const f=en.target.querySelector('.frame');f.classList.add('flash');setTimeout(()=>f.classList.remove('flash'),1900);}
+  }),{rootMargin:'-110px 0px -45% 0px'});
+  document.querySelectorAll('.poster').forEach(s=>io.observe(s));
+}
+
+document.addEventListener('click',e=>{
+  const l=e.target.closest('.seg button'); if(l){lang=l.dataset.l;try{localStorage.setItem('sml-lang',lang)}catch(err){}render();return;}
+  if(e.target.closest('#eye')){const b=document.getElementById('eye'),on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));document.body.classList.toggle('show-hs',on);}
+});
+render();
+</script>
+
+</body>
+</html>
